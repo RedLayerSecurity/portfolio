@@ -1,153 +1,294 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ancy Sneha | Cyber Security Consultant</title>
-  <style>
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background-color: #f7f9fc;
-      color: #1f2933;
-      margin: 0;
-      padding: 0;
-      line-height: 1.6;
-    }
-    .container {
-      max-width: 900px;
-      margin: auto;
-      padding: 40px 20px;
-      background: #ffffff;
-    }
-    h1, h2, h3 {
-      color: #0f172a;
-    }
-    h1 {
-      font-size: 32px;
-      margin-bottom: 5px;
-    }
-    h2 {
-      margin-top: 40px;
-      border-bottom: 2px solid #e5e7eb;
-      padding-bottom: 8px;
-    }
-    p {
-      margin: 15px 0;
-    }
-    ul {
-      margin: 10px 0 20px 20px;
-    }
-    li {
-      margin-bottom: 8px;
-    }
-    .subtitle {
-      color: #475569;
-      font-size: 16px;
-    }
-    .section {
-      margin-top: 30px;
-    }
-    .highlight {
-      background: #f1f5f9;
-      padding: 20px;
-      border-left: 4px solid #2563eb;
-      margin: 25px 0;
-    }
-    .footer {
-      margin-top: 50px;
-      padding-top: 20px;
-      border-top: 1px solid #e5e7eb;
-      font-size: 14px;
-      color: #475569;
-    }
-    .contact {
-      background: #0f172a;
-      color: #ffffff;
-      padding: 25px;
-      margin-top: 40px;
-    }
-    .contact h2 {
-      color: #ffffff;
-      border: none;
-    }
-    .contact p {
-      margin: 8px 0;
-    }
-    a {
-      color: #2563eb;
-      text-decoration: none;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>RedLayer Security</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root {
+  --bg: #f8fafc;
+  --text: #0f172a;
+  --muted: #475569;
+  --card: #ffffff;
+  --border: #e2e8f0;
+  --accent: linear-gradient(135deg,#ef4444,#dc2626);
+  --accent-soft: rgba(239,68,68,0.15);
+  --blue: #2563eb;
+}
+
+[data-theme="dark"] {
+  --bg: #020617;
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+  --card: #0f172a;
+  --border: #1e293b;
+  --accent-soft: rgba(248,113,113,0.15);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 60px 20px;
+}
+
+/* HEADER */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 80px;
+}
+
+.logo {
+  font-size: 42px;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.logo span {
+  background: var(--accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  margin-top: 10px;
+  color: var(--muted);
+  max-width: 650px;
+  font-size: 18px;
+}
+
+.toggle {
+  padding: 10px 18px;
+  border-radius: 30px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.toggle:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px var(--accent-soft);
+}
+
+/* SECTION */
+section {
+  margin-bottom: 90px;
+}
+
+h2 {
+  font-size: 30px;
+  margin-bottom: 18px;
+  position: relative;
+  display: inline-block;
+}
+
+h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0%;
+  height: 4px;
+  background: var(--accent);
+  transition: width 0.4s ease;
+}
+
+section:hover h2::after {
+  width: 100%;
+}
+
+p {
+  color: var(--muted);
+  font-size: 17px;
+}
+
+/* CARDS */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 30px;
+  transition: all 0.35s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--accent-soft);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+}
+
+.card h3 {
+  margin-top: 0;
+  font-size: 20px;
+  z-index: 1;
+  position: relative;
+}
+
+.card ul {
+  padding-left: 18px;
+  z-index: 1;
+  position: relative;
+}
+
+.card li {
+  margin-bottom: 8px;
+}
+
+/* CTA */
+.cta {
+  background: linear-gradient(135deg,#020617,#1e293b);
+  padding: 60px;
+  border-radius: 25px;
+  color: white;
+  text-align: center;
+}
+
+.cta h2 {
+  color: white;
+}
+
+.cta p {
+  color: #cbd5f5;
+}
+
+.button {
+  margin-top: 25px;
+  display: inline-block;
+  padding: 14px 28px;
+  border-radius: 30px;
+  background: var(--accent);
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.button:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 15px 40px rgba(239,68,68,0.5);
+}
+
+/* FOOTER */
+footer {
+  margin-top: 100px;
+  color: var(--muted);
+  font-size: 14px;
+  text-align: center;
+}
+</style>
 </head>
-<body>
 
-  <div class="container">
-    <h1>Ancy Sneha</h1>
-    <p class="subtitle">Cyber Security Consultant | VAPT & Security Assessments</p>
+<body data-theme="light">
 
-    <div class="section">
-      <p>
-        I am a Cyber Security Consultant specializing in <strong>Vulnerability Assessment and Penetration Testing (VAPT)</strong>.
-        I help organizations identify security weaknesses, reduce risk, and improve their overall security posture through
-        structured assessments and actionable reporting.
-      </p>
-      <p>
-        My work focuses on practical security outcomes — not just finding vulnerabilities, but helping teams understand
-        impact, prioritize fixes, and remediate issues effectively.
-      </p>
-    </div>
+<div class="container">
 
-    <h2>Security Services</h2>
-    <ul>
-      <li>Web Application Penetration Testing</li>
-      <li>API Penetration Testing</li>
-      <li>Network Penetration Testing (Internal & External)</li>
-      <li>Infrastructure Penetration Testing</li>
-      <li>Thick Client Application Testing</li>
-      <li>Mobile Application Penetration Testing (Android & iOS)</li>
-    </ul>
-
-    <h2>Security Reviews & Assessments</h2>
-    <ul>
-      <li>Source Code Review</li>
-      <li>Configuration & Hardening Reviews (Servers & Systems)</li>
-      <li>Cloud Security Posture Reviews</li>
-      <li>Access Control & Authentication Reviews</li>
-    </ul>
-
-    <h2>Experience & Responsibilities</h2>
-    <ul>
-      <li>Led and supported Vulnerability Assessment and Penetration Testing (VAPT) engagements</li>
-      <li>Reviewed and approved security assessment reports for quality and accuracy</li>
-      <li>Conducted client walkthroughs explaining findings and remediation steps</li>
-      <li>Assisted teams with vulnerability remediation and validation</li>
-    </ul>
-
-    <div class="highlight">
-      <strong>Approach:</strong><br>
-      I follow a structured assessment methodology that balances thorough testing with minimal operational disruption.
-      Each engagement is scoped clearly, tested responsibly, and reported with business and technical clarity.
-    </div>
-
-    <h2>How I Work</h2>
-    <ul>
-      <li><strong>Scoping:</strong> Understand business context and attack surface</li>
-      <li><strong>Assessment:</strong> Perform controlled and systematic security testing</li>
-      <li><strong>Reporting:</strong> Deliver clear, prioritized, and actionable findings</li>
-      <li><strong>Support:</strong> Walkthrough findings and assist with remediation</li>
-    </ul>
-
-    <div class="contact">
-      <h2>Contact</h2>
-      <p>Email: <strong>ancysnehaa@email.com</strong></p>
-      <p>Available for project discussions, assessments, and report walkthroughs.</p>
-    </div>
-
-    <div class="footer">
-      © 2026 Ancy Sneha — Cyber Security Consultant<br>
-      Dedicated security engagements with defined scope and confidentiality.
+<header>
+  <div>
+    <div class="logo">RedLayer <span>Security</span></div>
+    <div class="subtitle">
+      We are a team driven by creativity, strategy, and purpose. Our focus is on building meaningful digital 
+      solutions that help brands grow, connect, and stand out in a competitive landscape. By combining thoughtful design, data-driven insights, 
+      and practical execution, we transform ideas into results. We believe in clarity, consistency, and collaboration—working closely with our 
+      clients to deliver solutions that are not only visually strong but also effective and sustainable.
     </div>
   </div>
+  <div class="toggle" onclick="toggleTheme()">🌗 Toggle</div>
+</header>
+
+<section>
+  <h2>Services</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Penetration Testing</h3>
+      <ul>
+        <li>Web & API Testing</li>
+        <li>Network Testing</li>
+        <li>Infrastructure Attacks</li>
+        <li>Mobile & Thick Client</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Security Reviews</h3>
+      <ul>
+        <li>Source Code Review</li>
+        <li>Cloud Configuration</li>
+        <li>Access Control Review</li>
+        <li>Hardening Checks</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Reporting & Support</h3>
+      <ul>
+        <li>Risk-prioritized findings</li>
+        <li>Clear remediation steps</li>
+        <li>Walkthrough calls</li>
+        <li>Post-test support</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <h2>Need a Security Assessment?</h2>
+  <p>
+    Communication and coordination handled directly.<br>
+    Testing performed by a dedicated security consultant.
+  </p>
+  <a class="button" href="mailto:ancysnehacibi@gmail.com">
+    Contact via Email
+  </a>
+</section>
+
+<footer>
+  © 2026 RedLayer Security · Confidential engagements only
+</footer>
+
+</div>
+
+<script>
+function toggleTheme() {
+  document.body.dataset.theme =
+    document.body.dataset.theme === "light" ? "dark" : "light";
+}
+</script>
 
 </body>
 </html>
