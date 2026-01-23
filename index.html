@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ancy Sneha | Data Analyst Portfolio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#ffffff;
+  --text:#111111;
+  --muted:#555555;
+  --card:#f4f4f4;
+  --border:#e0e0e0;
+  --primary:#1DB954;
+}
+
+body.dark{
+  --bg:#0f0f0f;
+  --text:#ffffff;
+  --muted:#b3b3b3;
+  --card:#181818;
+  --border:#262626;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+  font-family:'Inter',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.7;
+  transition:.3s;
+}
+
+header{
+  max-width:1100px;
+  margin:auto;
+  padding:80px 20px 60px;
+  position:relative;
+}
+
+.toggle{
+  position:absolute;
+  top:20px;
+  right:20px;
+  padding:8px 16px;
+  border-radius:20px;
+  border:1px solid var(--border);
+  background:var(--card);
+  cursor:pointer;
+  font-weight:600;
+}
+
+/* HERO */
+.hero{
+  display:grid;
+  grid-template-columns:1fr 180px;
+  gap:40px;
+  align-items:center;
+}
+
+.hero img{
+  width:180px;
+  height:180px;
+  object-fit:cover;
+  border-radius:50%;
+  border:4px solid var(--primary);
+}
+
+.hero h1{
+  font-size:3rem;
+  font-weight:700;
+}
+
+.hero h1 span{
+  color:var(--primary);
+}
+
+.hero p{
+  margin-top:15px;
+  max-width:650px;
+  font-size:1.15rem;
+  color:var(--muted);
+}
+
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:0 20px 80px;
+}
+
+section{margin-top:80px}
+
+.section-title{
+  font-size:1.9rem;
+  margin-bottom:35px;
+  position:relative;
+}
+
+.section-title::after{
+  content:"";
+  position:absolute;
+  width:50px;
+  height:4px;
+  background:var(--primary);
+  bottom:-10px;
+  left:0;
+  border-radius:2px;
+}
+
+/* ABOUT */
+.about{
+  max-width:900px;
+  color:var(--muted);
+  font-size:1.05rem;
+}
+
+/* SKILLS */
+.skills{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:30px;
+}
+
+.skill-card{
+  background:var(--card);
+  padding:28px;
+  border-radius:18px;
+  border:1px solid var(--border);
+}
+
+.skill-card h3{
+  color:var(--primary);
+  margin-bottom:15px;
+}
+
+.skill-card li{
+  margin-bottom:10px;
+}
+
+/* PROJECTS */
+.projects{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+  gap:30px;
+}
+
+.project{
+  background:var(--card);
+  padding:28px;
+  border-radius:18px;
+  border:1px solid var(--border);
+  transition:.3s;
+}
+
+.project:hover{
+  transform:translateY(-6px);
+}
+
+.project h3{
+  margin-bottom:10px;
+}
+
+.project p{
+  color:var(--muted);
+  margin-bottom:15px;
+}
+
+.project a{
+  color:var(--primary);
+  font-weight:600;
+}
+
+footer{
+  text-align:center;
+  padding:40px 20px;
+  color:var(--muted);
+  font-size:.9rem;
+}
+
+@media(max-width:768px){
+  .hero{
+    grid-template-columns:1fr;
+    text-align:center;
+  }
+  .hero img{
+    margin:auto;
+  }
+  .hero h1{font-size:2.2rem}
+}
+/* Contact Section */
+.contact-section {
+  padding: 80px 20px;
+  background-color: #f9fafb;
+}
+
+.contact-container {
+  max-width: 900px;
+  margin: auto;
+  text-align: center;
+}
+
+.contact-container h2 {
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+  color: #111827;
+}
+
+.contact-subtitle {
+  font-size: 1.05rem;
+  color: #4b5563;
+  max-width: 650px;
+  margin: 0 auto 40px;
+  line-height: 1.6;
+}
+
+/* Cards */
+.contact-cards {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.contact-card {
+  background: #ffffff;
+  padding: 30px;
+  width: 260px;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+}
+
+.contact-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 6px;
+  color: #1f2937;
+}
+
+.contact-card p {
+  font-size: 0.9rem;
+  color: #6b7280;
+  margin-bottom: 14px;
+}
+
+.contact-link {
+  display: inline-block;
+  font-weight: 600;
+  text-decoration: none;
+  color: #2563eb;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.3s ease;
+}
+
+.contact-link:hover {
+  border-color: #2563eb;
+}
+
+/* Highlight WhatsApp */
+.contact-card.highlight {
+  border: 2px solid #22c55e;
+}
+
+.contact-card.highlight .contact-link {
+  color: #16a34a;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .contact-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+  <button class="toggle" onclick="toggleTheme()">🌙 Dark</button>
+
+  <div class="hero">
+    <div>
+      <h1>Hello, I'm <span>Ancy Sneha</span></h1>
+      <p>
+        Data Analyst specializing in Excel dashboards, SQL analysis, and business reporting.
+        I help businesses transform raw data into clear insights, automated reports,
+        and decision-ready dashboards.
+      </p>
+    </div>
+
+    <img src="Ancy_profile.jpeg" alt="Profile Photo">
+  </div>
+</header>
+
+<div class="container">
+
+<!-- ABOUT -->
+<section>
+  <h2 class="section-title">Who I Am</h2>
+  <div class="about">
+    <p>
+      I work with structured business data across domains such as sales, hospitality,
+      healthcare, and operations. My focus is on cleaning data, automating reports,
+      and simplifying complex information into actionable insights.
+    </p>
+    <br>
+    <p>
+      I enjoy handling end-to-end data projects from data preparation and analysis
+      to visualization and storytelling helping teams track performance and make
+      data-driven decisions faster.
+    </p>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section>
+  <h2 class="section-title">Services I Offer</h2>
+  <div class="skills">
+    <div class="skill-card">
+      <ul>
+        <li>Excel Dashboards & Automated Reports</li>
+        <li>Data Cleaning & Formatting</li>
+        <li>SQL Queries & Business Reports</li>
+        <li>Power BI Dashboards</li>
+        <li>PDF & Management Reports</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section>
+  <h2 class="section-title">Skills</h2>
+  <div class="skills">
+
+    <div class="skill-card">
+      <h3>Advanced Excel</h3>
+      <ul>
+        <li>Pivot Tables & Charts</li>
+        <li>Power Query</li>
+        <li>VLOOKUP / XLOOKUP</li>
+        <li>Dashboard Creation</li>
+      </ul>
+    </div>
+
+    <div class="skill-card">
+      <h3>Data Analysis</h3>
+      <ul>
+        <li>Data Cleaning & EDA</li>
+        <li>Pandas & NumPy</li>
+        <li>Power BI</li>
+      </ul>
+    </div>
+
+    <div class="skill-card">
+      <h3>Databases & Programming</h3>
+      <ul>
+        <li>SQL (MySQL, PostgreSQL)</li>
+        <li>Python</li>
+        <li>ETL Concepts</li>
+      </ul>
+    </div>
+
+    <div class="skill-card">
+      <h3>Visualization & Tools</h3>
+      <ul>
+        <li>Matplotlib</li>
+        <li>Jupyter Notebook</li>
+        <li>Git & GitHub</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section>
+  <h2 class="section-title">Projects</h2>
+
+  <div class="projects">
+
+    <div class="project">
+      <h3>Spotify Streaming Trends Analysis</h3>
+      <p>
+        Built an analytical report to identify artist popularity, genre trends,
+        and listening patterns using SQL and Python with clear visual insights.
+      </p>
+      <a href="spotify.html" target="_blank">View Project →</a>
+    </div>
+
+    <div class="project">
+      <h3>Hotel Booking Data Analysis</h3>
+      <p>
+        Analyzed booking data to identify cancellation drivers, seasonal demand,
+        and customer behavior. Delivered insights through Excel reports and visuals.
+      </p>
+      <a href="hotel.html">View Project →</a>
+    </div>
+
+    <div class="project">
+      <h3>Hospital Management Data Analysis</h3>
+      <p>
+        Analyzed patient flow, department performance, and resource utilization
+        to identify operational bottlenecks and efficiency opportunities.
+      </p>
+      <a href="hospital.html">View Project →</a>
+    </div>
+
+  </div>
+</section>
+<section id="contact" class="contact-section">
+  <div class="contact-container">
+    <h2>Let’s Work Together</h2>
+    <p class="contact-subtitle">
+      Need quick help with Excel automation, SQL queries, Power BI dashboards, or reports?  
+      I focus on fast delivery and business-ready results.
+    </p>
+
+    <div class="contact-cards">
+      <!-- Email -->
+      <div class="contact-card">
+        <h3>Email</h3>
+        <p>Reach me anytime</p>
+        <a href="mailto:ancy.sneha@email.com" class="contact-link">
+          ancysnehaa@email.com
+        </a>
+      </div>
+
+      <!-- WhatsApp -->
+      <div class="contact-card highlight">
+        <h3>WhatsApp</h3>
+        <p>Fastest response</p>
+        <a href="https://wa.me/919994608350" target="_blank" class="contact-link">
+          Chat on WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  © 2026 | Ancy Sneha — Data Analyst & Dashboard Specialist
+</footer>
+
+<script>
+function toggleTheme(){
+  document.body.classList.toggle("dark");
+}
+</script>
+
+</body>
+</html>
