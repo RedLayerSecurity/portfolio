@@ -14,7 +14,6 @@
   --border: #e2e8f0;
   --accent: linear-gradient(135deg,#ef4444,#dc2626);
   --accent-soft: rgba(239,68,68,0.15);
-  --blue: #2563eb;
 }
 
 [data-theme="dark"] {
@@ -26,16 +25,14 @@
   --accent-soft: rgba(248,113,113,0.15);
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
-  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: Inter, system-ui, sans-serif;
   background: var(--bg);
   color: var(--text);
-  transition: background 0.4s ease, color 0.4s ease;
+  transition: 0.4s;
 }
 
 .container {
@@ -44,18 +41,16 @@ body {
   padding: 60px 20px;
 }
 
-/* HEADER */
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 80px;
+  margin-bottom: 90px;
 }
 
 .logo {
   font-size: 42px;
   font-weight: 800;
-  letter-spacing: -1px;
 }
 
 .logo span {
@@ -65,9 +60,9 @@ header {
 }
 
 .subtitle {
-  margin-top: 10px;
+  margin-top: 12px;
   color: var(--muted);
-  max-width: 650px;
+  max-width: 680px;
   font-size: 18px;
 }
 
@@ -77,47 +72,18 @@ header {
   border: 1px solid var(--border);
   background: var(--card);
   cursor: pointer;
-  transition: all 0.3s ease;
 }
 
-.toggle:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px var(--accent-soft);
-}
-
-/* SECTION */
-section {
-  margin-bottom: 90px;
-}
+section { margin-bottom: 90px; }
 
 h2 {
   font-size: 30px;
   margin-bottom: 18px;
   position: relative;
-  display: inline-block;
 }
 
-h2::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -6px;
-  width: 0%;
-  height: 4px;
-  background: var(--accent);
-  transition: width 0.4s ease;
-}
+p { color: var(--muted); font-size: 17px; }
 
-section:hover h2::after {
-  width: 100%;
-}
-
-p {
-  color: var(--muted);
-  font-size: 17px;
-}
-
-/* CARDS */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
@@ -130,7 +96,7 @@ p {
   border: 1px solid var(--border);
   border-radius: 18px;
   padding: 30px;
-  transition: all 0.35s ease;
+  transition: 0.3s;
   position: relative;
   overflow: hidden;
 }
@@ -141,50 +107,20 @@ p {
   inset: 0;
   background: var(--accent-soft);
   opacity: 0;
-  transition: opacity 0.35s ease;
 }
 
-.card:hover::before {
-  opacity: 1;
-}
+.card:hover::before { opacity: 1; }
+.card:hover { transform: translateY(-10px); }
 
-.card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 30px 60px rgba(0,0,0,0.2);
-}
+.card h3 { margin-top: 0; }
+.card ul { padding-left: 18px; }
 
-.card h3 {
-  margin-top: 0;
-  font-size: 20px;
-  z-index: 1;
-  position: relative;
-}
-
-.card ul {
-  padding-left: 18px;
-  z-index: 1;
-  position: relative;
-}
-
-.card li {
-  margin-bottom: 8px;
-}
-
-/* CTA */
 .cta {
   background: linear-gradient(135deg,#020617,#1e293b);
   padding: 60px;
   border-radius: 25px;
   color: white;
   text-align: center;
-}
-
-.cta h2 {
-  color: white;
-}
-
-.cta p {
-  color: #cbd5f5;
 }
 
 .button {
@@ -196,15 +132,8 @@ p {
   color: white;
   text-decoration: none;
   font-weight: 600;
-  transition: all 0.3s ease;
 }
 
-.button:hover {
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 15px 40px rgba(239,68,68,0.5);
-}
-
-/* FOOTER */
 footer {
   margin-top: 100px;
   color: var(--muted);
@@ -215,21 +144,27 @@ footer {
 </head>
 
 <body data-theme="light">
-
 <div class="container">
 
 <header>
   <div>
     <div class="logo">RedLayer <span>Security</span></div>
     <div class="subtitle">
-      We are a team driven by creativity, strategy, and purpose. Our focus is on building meaningful digital 
-      solutions that help brands grow, connect, and stand out in a competitive landscape. By combining thoughtful design, data-driven insights, 
-      and practical execution, we transform ideas into results. We believe in clarity, consistency, and collaboration—working closely with our 
-      clients to deliver solutions that are not only visually strong but also effective and sustainable.
+      Practical, standards-based cybersecurity assessments focused on identifying
+      real-world risks and providing clear remediation guidance.
     </div>
   </div>
   <div class="toggle" onclick="toggleTheme()">🌗 Toggle</div>
 </header>
+
+<section>
+  <h2>Who We Are</h2>
+  <p>
+    RedLayer Security delivers focused vulnerability assessments and penetration testing
+    for web applications and infrastructure. Our goal is to help organizations identify,
+    understand, and remediate security risks before they are exploited.
+  </p>
+</section>
 
 <section>
   <h2>Services</h2>
@@ -240,7 +175,7 @@ footer {
         <li>Web & API Testing</li>
         <li>Network Testing</li>
         <li>Infrastructure Attacks</li>
-        <li>Mobile & Thick Client</li>
+        <li>Mobile Applications</li>
       </ul>
     </div>
 
@@ -248,8 +183,8 @@ footer {
       <h3>Security Reviews</h3>
       <ul>
         <li>Source Code Review</li>
-        <li>Cloud Configuration</li>
-        <li>Access Control Review</li>
+        <li>Cloud Configuration Review</li>
+        <li>Access Control Analysis</li>
         <li>Hardening Checks</li>
       </ul>
     </div>
@@ -259,9 +194,82 @@ footer {
       <ul>
         <li>Risk-prioritized findings</li>
         <li>Clear remediation steps</li>
-        <li>Walkthrough calls</li>
-        <li>Post-test support</li>
+        <li>Walkthrough discussions</li>
+        <li>Post-assessment support</li>
       </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Testing Methodology</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Reconnaissance</h3>
+      <ul>
+        <li>Attack surface mapping</li>
+        <li>Technology identification</li>
+        <li>Entry point discovery</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Vulnerability Analysis</h3>
+      <ul>
+        <li>OWASP Top 10 testing</li>
+        <li>Manual validation</li>
+        <li>False-positive elimination</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Reporting & Retest</h3>
+      <ul>
+        <li>CVSS-based risk ratings</li>
+        <li>Actionable remediation</li>
+        <li>Optional retesting</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Tools & Standards</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Tools</h3>
+      <ul>
+        <li>Burp Suite</li>
+        <li>OWASP ZAP</li>
+        <li>Nmap</li>
+        <li>Manual Testing</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Standards</h3>
+      <ul>
+        <li>OWASP Top 10</li>
+        <li>OWASP ASVS</li>
+        <li>CWE & CVSS</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Sample Work</h2>
+  <p>Demonstration assessment performed on a controlled lab environment.</p>
+  <div class="grid">
+    <div class="card">
+      <h3>Web Application Security Assessment</h3>
+      <ul>
+        <li>SQL Injection</li>
+        <li>Cross-Site Scripting (XSS)</li>
+        <li>Security Misconfigurations</li>
+        <li>Authentication Issues</li>
+      </ul>
+      <a class="button" href="Website_Security_Assessment_Report_Sample.pdf">View Sample Report</a>
     </div>
   </div>
 </section>
@@ -269,12 +277,10 @@ footer {
 <section class="cta">
   <h2>Need a Security Assessment?</h2>
   <p>
-    Communication and coordination handled directly.<br>
-    Testing performed by a dedicated security consultant.
+    Engagements handled confidentially.<br>
+    Testing performed only with authorization.
   </p>
-  <a class="button" href="mailto:infantcibisurya@outlook.com">
-    Contact via Email
-  </a>
+  <a class="button" href="mailto:infantcibisurya@outlook.com">Contact via Email</a>
 </section>
 
 <footer>
@@ -292,4 +298,3 @@ function toggleTheme() {
 
 </body>
 </html>
-
