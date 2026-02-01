@@ -1,376 +1,266 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>ICS Security | Assessments</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ICS AppSec | Application & Cloud Security</title>
+  <meta name="description" content="High-fidelity application and cloud security assessments with real-world exploitation, validation, and remediation." />
 
-<style>
-:root {
-  --bg: #f8fafc;
-  --text: #0f172a;
-  --muted: #64748b;
-  --card: #ffffff;
-  --accent: #dc2626;
-  --accent-glow: rgba(220, 38, 38, 0.2);
-  --border: #e2e8f0;
-  --glass: rgba(255, 255, 255, 0.7);
-}
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-[data-theme="dark"] {
-  --bg: #020617;
-  --text: #f1f5f9;
-  --muted: #94a3b8;
-  --card: #0f172a;
-  --border: #1e293b;
-  --glass: rgba(15, 23, 42, 0.7);
-}
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-* { box-sizing: border-box; }
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --primary: #2563eb;
+      --border: #e2e8f0;
+    }
 
-body {
-  margin: 0;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.5;
-  transition: background 0.3s ease;
-}
+    body.dark {
+      --bg: #020617;
+      --card: #020617;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --primary: #3b82f6;
+      --border: #1e293b;
+    }
 
-.container {
-  max-width: 1100px;
-  margin: auto;
-  padding: 40px 24px;
-}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
 
-/* Header & Toggle */
-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 80px;
-  text-align: center;
-}
+    body {
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      transition: background 0.3s, color 0.3s;
+    }
 
-.logo {
-  font-size: clamp(32px, 5vw, 48px);
-  font-weight: 800;
-  letter-spacing: -1px;
-}
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
 
-.logo span { color: var(--accent); }
+    body.dark header {
+      background: rgba(2,6,23,0.85);
+    }
 
-.subtitle {
-  margin-top: 16px;
-  color: var(--muted);
-  font-size: 1.1rem;
-  max-width: 600px;
-}
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 24px;
+    }
 
-.theme-switch {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background: var(--card);
-  border: 1px solid var(--border);
-  padding: 10px;
-  border-radius: 50%;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  z-index: 100;
-}
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 0;
+    }
 
-/* Services Section - Grid Layout */
-.section-title {
-  font-size: 2rem;
-  font-weight: 800;
-  margin-bottom: 40px;
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
+    .nav a {
+      margin-left: 24px;
+      text-decoration: none;
+      color: var(--muted);
+      font-weight: 500;
+    }
 
-.section-title::after {
-  content: "";
-  height: 2px;
-  flex-grow: 1;
-  background: linear-gradient(to right, var(--accent), transparent);
-}
+    .nav a:hover {
+      color: var(--primary);
+    }
 
-.services-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 24px;
-  margin-bottom: 100px;
-}
+    .toggle {
+      padding: 6px 14px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: none;
+      color: var(--text);
+      cursor: pointer;
+    }
 
-.service-item {
-  background: var(--card);
-  border: 1px solid var(--border);
-  padding: 24px;
-  border-radius: 16px;
-  transition: all 0.3s ease;
-  display: flex;
-  flex-direction: column;
-}
+    /* Hero */
+    .hero {
+      padding: 120px 0 100px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 60px;
+      align-items: center;
+    }
 
-.service-item:hover {
-  border-color: var(--accent);
-  transform: translateY(-4px);
-  box-shadow: 0 12px 24px -10px var(--accent-glow);
-}
+    .hero h1 {
+      font-size: 3.2rem;
+      font-weight: 800;
+    }
 
-.service-tag {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 12px;
-  color: var(--accent);
-  text-transform: uppercase;
-  font-weight: 700;
-  margin-bottom: 8px;
-}
+    .hero span { color: var(--primary); }
 
-.service-name {
-  font-size: 1.1rem;
-  font-weight: 700;
-  margin-bottom: 0;
-}
+    .hero p {
+      margin-top: 20px;
+      font-size: 1.1rem;
+      color: var(--muted);
+    }
 
-/* Modern Flowchart / Timeline */
-.flow-container {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  max-width: 800px;
-  margin: 0 auto;
-}
+    .btn {
+      display: inline-block;
+      margin-top: 32px;
+      padding: 14px 28px;
+      background: var(--primary);
+      color: #fff;
+      border-radius: 14px;
+      text-decoration: none;
+      font-weight: 600;
+    }
 
-.flow-node {
-  display: flex;
-  gap: 40px;
-  padding-bottom: 40px;
-  position: relative;
-}
+    .hero-icon {
+      font-size: 220px;
+      color: rgba(37,99,235,0.15);
+      text-align: center;
+    }
 
-.flow-node::before {
-  content: "";
-  position: absolute;
-  left: 19px;
-  top: 40px;
-  bottom: 0;
-  width: 2px;
-  background: var(--border);
-}
+    section { padding: 100px 0; }
 
-.flow-node:last-child::before { display: none; }
+    h2 {
+      font-size: 2.4rem;
+      margin-bottom: 48px;
+    }
 
-.node-icon {
-  width: 40px;
-  height: 40px;
-  background: var(--accent);
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-weight: 800;
-  z-index: 2;
-  flex-shrink: 0;
-}
+    /* Services */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 32px;
+    }
 
-.node-content {
-  background: var(--card);
-  border: 1px solid var(--border);
-  padding: 24px;
-  border-radius: 16px;
-  width: 100%;
-}
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
 
-.node-content h3 {
-  margin-top: 0;
-  font-size: 1.25rem;
-}
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    }
 
-.node-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 10px;
-  list-style: none;
-  padding: 0;
-  margin-top: 15px;
-}
+    .card i {
+      font-size: 34px;
+      color: var(--primary);
+      margin-bottom: 20px;
+    }
 
-.node-list li {
-  font-size: 14px;
-  color: var(--muted);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
+    /* Approach */
+    .step span {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
 
-.node-list li::before {
-  content: "→";
-  color: var(--accent);
-  font-weight: bold;
-}
+    /* CTA */
+    .cta {
+      background: var(--primary);
+      color: #fff;
+      text-align: center;
+    }
 
-/* CTA Section */
-.cta-box {
-  background: var(--text);
-  color: var(--bg);
-  padding: 60px 40px;
-  border-radius: 24px;
-  text-align: center;
-  margin-top: 80px;
-  position: relative;
-  overflow: hidden;
-}
+    .cta p { color: #dbeafe; }
 
-.cta-box h2 { font-size: 2.5rem; margin-top: 0; }
+    .cta .btn {
+      background: #fff;
+      color: var(--primary);
+    }
 
-.button {
-  background: var(--accent);
-  color: white;
-  padding: 16px 32px;
-  border-radius: 12px;
-  text-decoration: none;
-  font-weight: 700;
-  display: inline-block;
-  margin-top: 24px;
-  transition: 0.2s;
-}
+    footer {
+      text-align: center;
+      padding: 30px 0;
+      font-size: 0.9rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
 
-.button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 20px var(--accent-glow);
-}
-
-footer {
-  margin-top: 60px;
-  text-align: center;
-  color: var(--muted);
-  font-size: 13px;
-  padding-bottom: 40px;
-}
-
-@media (max-width: 600px) {
-  .flow-node { gap: 20px; }
-  .node-list { grid-template-columns: 1fr; }
-}
-</style>
+    @media(max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-icon { display: none; }
+    }
+  </style>
 </head>
+<body>
 
-<body data-theme="dark">
+<header>
+  <div class="container nav">
+    <strong>ICS AppSec</strong>
+    <div>
+      <a href="#services">Services</a>
+      <a href="#approach">Approach</a>
+      <a href="#contact">Contact</a>
+      <button class="toggle" onclick="toggleTheme()">Dark</button>
+    </div>
+  </div>
+</header>
 
-<button class="theme-switch" onclick="toggleTheme()" aria-label="Toggle Theme">🌗</button>
-
-<div class="container">
-  <header>
-    <div class="logo">ICS <span>Security</span></div>
-    <p class="subtitle">High-fidelity cybersecurity assessments focused on real-world risk and technical remediation.</p>
-  </header>
+<main class="container">
+  <section class="hero">
+    <div>
+      <h1>High-Fidelity <span>Application & Cloud</span><br>Security Assessments</h1>
+      <p>Focused on real-world exploitation, validation, and remediation aligned with modern attack vectors.</p>
+      <p><strong>Certification • CEH</strong></p>
+      <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSf44yf8DJBekoPXx4gcJdf6zJktLmFAzP_qzdD4aAqwxI0DIw/viewform">Initiate Contact</a>
+    </div>
+    <div class="hero-icon"><i class="fas fa-shield-halved"></i></div>
+  </section>
 
   <section id="services">
-    <h2 class="section-title">Core Services</h2>
-    <div class="services-grid">
-      <div class="service-item">
-        <span class="service-tag">Application</span>
-        <h3 class="service-name">Web Application Security</h3>
-      </div>
-      <div class="service-item">
-        <span class="service-tag">API & Cloud</span>
-        <h3 class="service-name">API Security Testing</h3>
-      </div>
-      <div class="service-item">
-        <span class="service-tag">Mobile</span>
-        <h3 class="service-name">Mobile App Security</h3>
-      </div>
-      <div class="service-item">
-        <span class="service-tag">Software</span>
-        <h3 class="service-name">Thick Client Security</h3>
-      </div>
-      <div class="service-item">
-        <span class="service-tag">Offensive</span>
-        <h3 class="service-name">Vulnerability Assessment & Pen-Testing</h3>
-      </div>
-      <div class="service-item">
-        <span class="service-tag">Network</span>
-        <h3 class="service-name">Infrastructure Penetration Testing</h3>
-      </div>
-      <div class="service-item">
-        <span class="service-tag">Cloud</span>
-        <h3 class="service-name">Cloud Security Posture (CSPM)</h3>
-      </div>
-      <div class="service-item">
-        <span class="service-tag">Code</span>
-        <h3 class="service-name">Secure Source Code Review</h3>
-      </div>
-      <div class="service-item">
-        <span class="service-tag">Defense</span>
-        <h3 class="service-name">Server Hardening & Config Review</h3>
-      </div>
+    <h2>Core Services</h2>
+    <div class="grid">
+      <div class="card"><i class="fas fa-bug"></i><h3>Web Application Security</h3></div>
+      <div class="card"><i class="fas fa-cloud"></i><h3>API Security Testing</h3></div>
+      <div class="card"><i class="fas fa-mobile"></i><h3>Mobile App Security</h3></div>
+      <div class="card"><i class="fas fa-code"></i><h3>Secure Source Code Review</h3></div>
+      <div class="card"><i class="fas fa-network-wired"></i><h3>Infrastructure Penetration Testing</h3></div>
+      <div class="card"><i class="fas fa-shield"></i><h3>VAPT & Offensive Testing</h3></div>
     </div>
   </section>
 
   <section id="approach">
-    <h2 class="section-title">Engagement Lifecycle</h2>
-    
-    <div class="flow-container">
-      <div class="flow-node">
-        <div class="node-icon">01</div>
-        <div class="node-content">
-          <h3>Introduction Call</h3>
-          <p style="text-align: left; margin: 0;">Establishment of requirements, scoping, and strategic objectives before kick-off.</p>
-        </div>
-      </div>
-
-      <div class="flow-node">
-        <div class="node-icon">02</div>
-        <div class="node-content">
-          <h3>Engagement Phase</h3>
-          <ul class="node-list">
-            <li>Information Gathering</li>
-            <li>Enumeration</li>
-            <li>Mapping</li>
-            <li>Test Case Execution</li>
-            <li>Automated Scanning</li>
-            <li>Correlation & Analysis</li>
-            <li>Quality Assessments</li>
-            <li>POC Documentation</li>
-            <li>PDF/Excel Reporting</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="flow-node">
-        <div class="node-icon">03</div>
-        <div class="node-content">
-          <h3>Post Engagement</h3>
-          <ul class="node-list">
-            <li>Report Walkthrough</li>
-            <li>Remediation Retest</li>
-          </ul>
-        </div>
-      </div>
+    <h2>Our Approach</h2>
+    <div class="grid">
+      <div class="card step"><span>01</span><h3>Pre-Engagement</h3><p>Scope definition, authorization, and timeline alignment.</p></div>
+      <div class="card step"><span>02</span><h3>Engagement</h3><p>Structured testing, exploitation validation, and reporting.</p></div>
+      <div class="card step"><span>03</span><h3>Post-Engagement</h3><p>Report walkthrough, remediation support, and retesting.</p></div>
     </div>
   </section>
+</main>
 
-  <section class="cta-box">
-    <h2>Secure Your Infrastructure</h2>
-    <p>Confidential engagements. Authorized testing only.</p>
-    <a href="mailto:infantcibisurya@outlook.com" class="button">Initiate Contact</a>
-  </section>
+<section id="contact" class="cta">
+  <div class="container">
+    <h2>Authorized Security Assessments</h2>
+    <p>All engagements are performed with written approval and defined scope.</p>
+    <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSf44yf8DJBekoPXx4gcJdf6zJktLmFAzP_qzdD4aAqwxI0DIw/viewform">Contact Security Team</a>
+  </div>
+</section>
 
-  <footer>
-    © 2026 ICS Security • Professional Cybersecurity Assessments
-  </footer>
-</div>
+<footer>
+  © 2026 ICS AppSec • CEH Certified • Confidential & Authorized Testing Only
+</footer>
 
 <script>
-function toggleTheme() {
-  const body = document.body;
-  body.dataset.theme = body.dataset.theme === "dark" ? "light" : "dark";
-}
+  function toggleTheme() {
+    document.body.classList.toggle('dark');
+  }
 </script>
 
 </body>
