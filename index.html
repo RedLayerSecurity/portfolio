@@ -2,297 +2,374 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>RedLayer Security</title>
+<title>ICS Security | Assessments</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
 
 <style>
 :root {
   --bg: #f8fafc;
   --text: #0f172a;
-  --muted: #475569;
+  --muted: #64748b;
   --card: #ffffff;
+  --accent: #dc2626;
+  --accent-glow: rgba(220, 38, 38, 0.2);
   --border: #e2e8f0;
-  --accent: linear-gradient(135deg,#ef4444,#dc2626);
-  --accent-soft: rgba(239,68,68,0.15);
+  --glass: rgba(255, 255, 255, 0.7);
 }
 
 [data-theme="dark"] {
   --bg: #020617;
-  --text: #e5e7eb;
-  --muted: #9ca3af;
+  --text: #f1f5f9;
+  --muted: #94a3b8;
   --card: #0f172a;
   --border: #1e293b;
-  --accent-soft: rgba(248,113,113,0.15);
+  --glass: rgba(15, 23, 42, 0.7);
 }
 
 * { box-sizing: border-box; }
 
 body {
   margin: 0;
-  font-family: Inter, system-ui, sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   background: var(--bg);
   color: var(--text);
-  transition: 0.4s;
+  line-height: 1.5;
+  transition: background 0.3s ease;
 }
 
 .container {
   max-width: 1100px;
   margin: auto;
-  padding: 60px 20px;
+  padding: 40px 24px;
 }
 
+/* Header & Toggle */
 header {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  margin-bottom: 90px;
+  margin-bottom: 80px;
+  text-align: center;
 }
 
 .logo {
-  font-size: 42px;
+  font-size: clamp(32px, 5vw, 48px);
   font-weight: 800;
+  letter-spacing: -1px;
 }
 
-.logo span {
-  background: var(--accent);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
+.logo span { color: var(--accent); }
 
 .subtitle {
-  margin-top: 12px;
+  margin-top: 16px;
   color: var(--muted);
-  max-width: 680px;
-  font-size: 18px;
+  font-size: 1.1rem;
+  max-width: 600px;
 }
 
-.toggle {
-  padding: 10px 18px;
-  border-radius: 30px;
-  border: 1px solid var(--border);
+.theme-switch {
+  position: fixed;
+  top: 20px;
+  right: 20px;
   background: var(--card);
+  border: 1px solid var(--border);
+  padding: 10px;
+  border-radius: 50%;
   cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  z-index: 100;
 }
 
-section { margin-bottom: 90px; }
+/* Services Section - Grid Layout */
+.section-title {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
 
-h2 {
-  font-size: 30px;
-  margin-bottom: 18px;
+.section-title::after {
+  content: "";
+  height: 2px;
+  flex-grow: 1;
+  background: linear-gradient(to right, var(--accent), transparent);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  margin-bottom: 100px;
+}
+
+.service-item {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 24px;
+  border-radius: 16px;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.service-item:hover {
+  border-color: var(--accent);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px -10px var(--accent-glow);
+}
+
+.service-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--accent);
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.service-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0;
+}
+
+/* Modern Flowchart / Timeline */
+.flow-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.flow-node {
+  display: flex;
+  gap: 40px;
+  padding-bottom: 40px;
   position: relative;
 }
 
-p { color: var(--muted); font-size: 17px; }
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
-  gap: 30px;
-  margin-top: 30px;
+.flow-node::before {
+  content: "";
+  position: absolute;
+  left: 19px;
+  top: 40px;
+  bottom: 0;
+  width: 2px;
+  background: var(--border);
 }
 
-.card {
+.flow-node:last-child::before { display: none; }
+
+.node-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--accent);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 800;
+  z-index: 2;
+  flex-shrink: 0;
+}
+
+.node-content {
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 18px;
-  padding: 30px;
-  transition: 0.3s;
+  padding: 24px;
+  border-radius: 16px;
+  width: 100%;
+}
+
+.node-content h3 {
+  margin-top: 0;
+  font-size: 1.25rem;
+}
+
+.node-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+  margin-top: 15px;
+}
+
+.node-list li {
+  font-size: 14px;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.node-list li::before {
+  content: "→";
+  color: var(--accent);
+  font-weight: bold;
+}
+
+/* CTA Section */
+.cta-box {
+  background: var(--text);
+  color: var(--bg);
+  padding: 60px 40px;
+  border-radius: 24px;
+  text-align: center;
+  margin-top: 80px;
   position: relative;
   overflow: hidden;
 }
 
-.card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: var(--accent-soft);
-  opacity: 0;
-}
-
-.card:hover::before { opacity: 1; }
-.card:hover { transform: translateY(-10px); }
-
-.card h3 { margin-top: 0; }
-.card ul { padding-left: 18px; }
-
-.cta {
-  background: linear-gradient(135deg,#020617,#1e293b);
-  padding: 60px;
-  border-radius: 25px;
-  color: white;
-  text-align: center;
-}
+.cta-box h2 { font-size: 2.5rem; margin-top: 0; }
 
 .button {
-  margin-top: 25px;
-  display: inline-block;
-  padding: 14px 28px;
-  border-radius: 30px;
   background: var(--accent);
   color: white;
+  padding: 16px 32px;
+  border-radius: 12px;
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 700;
+  display: inline-block;
+  margin-top: 24px;
+  transition: 0.2s;
+}
+
+.button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px var(--accent-glow);
 }
 
 footer {
-  margin-top: 100px;
-  color: var(--muted);
-  font-size: 14px;
+  margin-top: 60px;
   text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+  padding-bottom: 40px;
+}
+
+@media (max-width: 600px) {
+  .flow-node { gap: 20px; }
+  .node-list { grid-template-columns: 1fr; }
 }
 </style>
 </head>
 
-<body data-theme="light">
+<body data-theme="dark">
+
+<button class="theme-switch" onclick="toggleTheme()" aria-label="Toggle Theme">🌗</button>
+
 <div class="container">
+  <header>
+    <div class="logo">ICS <span>Security</span></div>
+    <p class="subtitle">High-fidelity cybersecurity assessments focused on real-world risk and technical remediation.</p>
+  </header>
 
-<header>
-  <div>
-    <div class="logo">RedLayer <span>Security</span></div>
-    <div class="subtitle">
-      Practical, standards-based cybersecurity assessments focused on identifying
-      real-world risks and providing clear remediation guidance.
+  <section id="services">
+    <h2 class="section-title">Core Services</h2>
+    <div class="services-grid">
+      <div class="service-item">
+        <span class="service-tag">Application</span>
+        <h3 class="service-name">Web Application Security</h3>
+      </div>
+      <div class="service-item">
+        <span class="service-tag">API & Cloud</span>
+        <h3 class="service-name">API Security Testing</h3>
+      </div>
+      <div class="service-item">
+        <span class="service-tag">Mobile</span>
+        <h3 class="service-name">Mobile App Security</h3>
+      </div>
+      <div class="service-item">
+        <span class="service-tag">Software</span>
+        <h3 class="service-name">Thick Client Security</h3>
+      </div>
+      <div class="service-item">
+        <span class="service-tag">Offensive</span>
+        <h3 class="service-name">Vulnerability Assessment & Pen-Testing</h3>
+      </div>
+      <div class="service-item">
+        <span class="service-tag">Network</span>
+        <h3 class="service-name">Infrastructure Penetration Testing</h3>
+      </div>
+      <div class="service-item">
+        <span class="service-tag">Cloud</span>
+        <h3 class="service-name">Cloud Security Posture (CSPM)</h3>
+      </div>
+      <div class="service-item">
+        <span class="service-tag">Code</span>
+        <h3 class="service-name">Secure Source Code Review</h3>
+      </div>
+      <div class="service-item">
+        <span class="service-tag">Defense</span>
+        <h3 class="service-name">Server Hardening & Config Review</h3>
+      </div>
     </div>
-  </div>
-  <div class="toggle" onclick="toggleTheme()">🌗 Toggle</div>
-</header>
+  </section>
 
-<section>
-  <h2>Who We Are</h2>
-  <p>
-    RedLayer Security delivers focused vulnerability assessments and penetration testing
-    for web applications and infrastructure. Our goal is to help organizations identify,
-    understand, and remediate security risks before they are exploited.
-  </p>
-</section>
+  <section id="approach">
+    <h2 class="section-title">Engagement Lifecycle</h2>
+    
+    <div class="flow-container">
+      <div class="flow-node">
+        <div class="node-icon">01</div>
+        <div class="node-content">
+          <h3>Introduction Call</h3>
+          <p style="text-align: left; margin: 0;">Establishment of requirements, scoping, and strategic objectives before kick-off.</p>
+        </div>
+      </div>
 
-<section>
-  <h2>Services</h2>
-  <div class="grid">
-    <div class="card">
-      <h3>Penetration Testing</h3>
-      <ul>
-        <li>Web & API Testing</li>
-        <li>Network Testing</li>
-        <li>Infrastructure Attacks</li>
-        <li>Mobile Applications</li>
-      </ul>
+      <div class="flow-node">
+        <div class="node-icon">02</div>
+        <div class="node-content">
+          <h3>Engagement Phase</h3>
+          <ul class="node-list">
+            <li>Information Gathering</li>
+            <li>Enumeration</li>
+            <li>Mapping</li>
+            <li>Test Case Execution</li>
+            <li>Automated Scanning</li>
+            <li>Correlation & Analysis</li>
+            <li>Quality Assessments</li>
+            <li>POC Documentation</li>
+            <li>PDF/Excel Reporting</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="flow-node">
+        <div class="node-icon">03</div>
+        <div class="node-content">
+          <h3>Post Engagement</h3>
+          <ul class="node-list">
+            <li>Report Walkthrough</li>
+            <li>Remediation Retest</li>
+          </ul>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <div class="card">
-      <h3>Security Reviews</h3>
-      <ul>
-        <li>Source Code Review</li>
-        <li>Cloud Configuration Review</li>
-        <li>Access Control Analysis</li>
-        <li>Hardening Checks</li>
-      </ul>
-    </div>
+  <section class="cta-box">
+    <h2>Secure Your Infrastructure</h2>
+    <p>Confidential engagements. Authorized testing only.</p>
+    <a href="mailto:infantcibisurya@outlook.com" class="button">Initiate Contact</a>
+  </section>
 
-    <div class="card">
-      <h3>Reporting & Support</h3>
-      <ul>
-        <li>Risk-prioritized findings</li>
-        <li>Clear remediation steps</li>
-        <li>Walkthrough discussions</li>
-        <li>Post-assessment support</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<section>
-  <h2>Testing Methodology</h2>
-  <div class="grid">
-    <div class="card">
-      <h3>Reconnaissance</h3>
-      <ul>
-        <li>Attack surface mapping</li>
-        <li>Technology identification</li>
-        <li>Entry point discovery</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <h3>Vulnerability Analysis</h3>
-      <ul>
-        <li>OWASP Top 10 testing</li>
-        <li>Manual validation</li>
-        <li>False-positive elimination</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <h3>Reporting & Retest</h3>
-      <ul>
-        <li>CVSS-based risk ratings</li>
-        <li>Actionable remediation</li>
-        <li>Optional retesting</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<section>
-  <h2>Tools & Standards</h2>
-  <div class="grid">
-    <div class="card">
-      <h3>Tools</h3>
-      <ul>
-        <li>Burp Suite</li>
-        <li>OWASP ZAP</li>
-        <li>Nmap</li>
-        <li>Manual Testing</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <h3>Standards</h3>
-      <ul>
-        <li>OWASP Top 10</li>
-        <li>OWASP ASVS</li>
-        <li>CWE & CVSS</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<section>
-  <h2>Sample Work</h2>
-  <p>Demonstration assessment performed on a controlled lab environment.</p>
-  <div class="grid">
-    <div class="card">
-      <h3>Web Application Security Assessment</h3>
-      <ul>
-        <li>SQL Injection</li>
-        <li>Cross-Site Scripting (XSS)</li>
-        <li>Security Misconfigurations</li>
-        <li>Authentication Issues</li>
-      </ul>
-      <a class="button" href="Website_Security_Assessment_Report_Sample.pdf">View Sample Report</a>
-    </div>
-  </div>
-</section>
-
-<section class="cta">
-  <h2>Need a Security Assessment?</h2>
-  <p>
-    Engagements handled confidentially.<br>
-    Testing performed only with authorization.
-  </p>
-  <a class="button" href="mailto:infantcibisurya@outlook.com">Contact via Email</a>
-</section>
-
-<footer>
-  © 2026 RedLayer Security · Confidential engagements only
-</footer>
-
+  <footer>
+    © 2026 ICS Security • Professional Cybersecurity Assessments
+  </footer>
 </div>
 
 <script>
 function toggleTheme() {
-  document.body.dataset.theme =
-    document.body.dataset.theme === "light" ? "dark" : "light";
+  const body = document.body;
+  body.dataset.theme = body.dataset.theme === "dark" ? "light" : "dark";
 }
 </script>
 
